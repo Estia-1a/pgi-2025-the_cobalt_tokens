@@ -2,6 +2,8 @@
 #define FEATURES_H
 
 
+void first_pixel (char *source_path);
+
 void helloWorld();
 
 #endif
