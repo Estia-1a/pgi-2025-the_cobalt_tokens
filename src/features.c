@@ -27,3 +27,30 @@ void dimension(char* filename) {
         free_image_data(data);
     }
 }
+
+void second_line(char *filename){
+    
+    int index, width, height, channel_count, R, G, B;
+    unsigned char* data;
+
+    
+    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+
+    } else if (height < 2 ){
+        printf ("Erreur : L'image doit avoir au moins 2 lignes de pixel\n");
+    } else {
+
+        index = width * 3;  
+
+        R = data[index];
+        G = data[index + 1];
+        B = data[index + 2];
+
+        printf("second_line: %d, %d, %d\n", R, G, B);
+        free_image_data(data);
+            
+    }
+
+
+}
