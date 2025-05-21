@@ -29,3 +29,58 @@ int width, height, channel_count;
         printf("Erreur avec l'image: %s\n", filename);
     }
 }
+
+void first_pixel (char *filename){
+
+unsigned char* data;
+int width, height, channel_count;
+ 
+    if (read_image_data(filename, &data, &width, &height, &channel_count)!=0) {
+       int R=data[0], G=data[1], B=data[2];
+        
+        printf("first_pixel : %d, %d, %d", R, G, B);
+        free_image_data(data);
+    } else { 
+        printf("Erreur avec l'image: %s\n", filename);
+    }
+}
+
+void dimension(char* filename) {
+    
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+    } else {
+        printf("dimension: %d, %d\n", width, height);
+        free_image_data(data);
+    }
+}
+
+void second_line(char *filename){
+    
+    int index, width, height, channel_count, R, G, B;
+    unsigned char* data;
+
+    
+    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+
+    } else if (height < 2 ){
+        printf ("Erreur : L'image doit avoir au moins 2 lignes de pixel\n");
+    } else {
+
+        index = width * 3;  
+
+        R = data[index];
+        G = data[index + 1];
+        B = data[index + 2];
+
+        printf("second_line: %d, %d, %d\n", R, G, B);
+        free_image_data(data);
+            
+    }
+
+
+}
