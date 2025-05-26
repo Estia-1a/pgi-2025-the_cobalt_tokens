@@ -4,4 +4,12 @@
 
 void helloWorld();
 
+
+
+
+
+
+
+
+void tenth_pixel(char* filename);
 #endif

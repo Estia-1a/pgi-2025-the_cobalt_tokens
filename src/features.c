@@ -14,3 +14,81 @@
 void helloWorld() {
     printf("Hello World !");
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void tenth_pixel(char* filename) {
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+        return;
+    }
+    int R, G, B;
+
+    int index = 9 * channel_count;
+    R = data[index];
+    G = data[index + 1];
+    B = data[index + 2];
+
+    printf("tenth_pixel: %d, %d, %d\n", R, G, B);
+
+    free_image_data(data);
+}
