@@ -86,3 +86,23 @@ void tenth_pixel(char* filename) {
  
     free_image_data(data);
 }
+
+void max_pixel(char *filename){
+    int W, H, x, y, max_somme=-1, max_x=0, max_y=0, R, G, B, somme=mp(R+B+G), mp;
+    pixelRGB **image
+    read_image_data(filename, &image, &W, &H);
+
+    for (y=0; y<H; y++) {
+        for (x=0; x<W; x++) {
+
+            if (somme>max_somme){
+                max_somme=somme;
+                max_pixel=mp;
+                max_x=x;
+                max_y=y;
+            }
+        }
+    }
+
+    printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y, mp.R, mp.G, mp.B)
+}

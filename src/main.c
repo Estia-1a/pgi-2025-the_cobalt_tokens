@@ -39,7 +39,9 @@ int main(int argc, char **argv) {
     second_line(configuration.filenames[0]);
   } else if ( strncmp( configuration.command, "tenth_pixel", 10 ) == 0 ) {
     tenth_pixel(configuration.filenames[0]);
-  } 
+  } else if ( strcmp(configuration.command, "max_pixel") == 0){
+    max_pixel(configuration.filenames[0]);
+  }
 
   /*
    * TO COMPLETE
