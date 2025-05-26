@@ -17,8 +17,8 @@ void helloWorld() {
 
 void first_pixel (char *filename){
 
-unsigned char* data;
-int width, height, channel_count;
+    unsigned char* data;
+    int width, height, channel_count;
  
     if (read_image_data(filename, &data, &width, &height, &channel_count)!=0) {
        int R=data[0], G=data[1], B=data[2];
