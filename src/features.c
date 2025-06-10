@@ -67,17 +67,34 @@ void second_line(char *filename){
         free_image_data(data);
             
     }
-    int R, G, B;
- 
+}
+
+void tenth_pixel(char* filename) {
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+        return;
+    }
+
+    if (width * height < 10) {
+        printf("Erreur : L'image doit contenir au moins 10 pixels\n");
+        free_image_data(data);
+        return;
+    }
+
     int index = 9 * channel_count;
-    R = data[index];
-    G = data[index + 1];
-    B = data[index + 2];
- 
+
+    int R = data[index];
+    int G = data[index + 1];
+    int B = data[index + 2];
+
     printf("tenth_pixel: %d, %d, %d\n", R, G, B);
- 
+
     free_image_data(data);
 }
+
 
 
 void print_pixel( char *filename, int x, int y ){
