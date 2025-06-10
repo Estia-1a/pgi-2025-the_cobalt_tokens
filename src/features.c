@@ -15,19 +15,6 @@ void helloWorld() {
     printf("Hello World !");
 }
 
-void dimension(char* filename) {
-    
-    unsigned char* data;
-    int width, height, channel_count;
-
-    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
-        printf("Erreur avec le fichier: %s\n", filename);
-    } else {
-        printf("dimension: %d, %d\n", width, height);
-        free_image_data(data);
-    }
-}
-
 void first_pixel (char *filename){
 
     unsigned char* data;
@@ -40,6 +27,20 @@ void first_pixel (char *filename){
         free_image_data(data);
     } else { 
         printf("Erreur avec l'image: %s\n", filename);
+    }
+}
+
+
+void dimension(char* filename) {
+    
+    unsigned char* data;
+    int width, height, channel_count;
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+    } else {
+        printf("dimension: %d, %d\n", width, height);
+        free_image_data(data);
     }
 }
 
@@ -63,59 +64,89 @@ void second_line(char *filename){
         B = data[index + 2];
 
         printf("second_line: %d, %d, %d\n", R, G, B);
-        free_image_data(data);     
+        free_image_data(data);
+            
     }
 }
 
 void tenth_pixel(char* filename) {
     unsigned char* data;
     int width, height, channel_count;
- 
+
     if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
         printf("Erreur avec le fichier: %s\n", filename);
         return;
     }
-    int R, G, B;
- 
+
+    if (width * height < 10) {
+        printf("Erreur : L'image doit contenir au moins 10 pixels\n");
+        free_image_data(data);
+        return;
+    }
+
     int index = 9 * channel_count;
-    R = data[index];
-    G = data[index + 1];
-    B = data[index + 2];
- 
+
+    int R = data[index];
+    int G = data[index + 1];
+    int B = data[index + 2];
+
     printf("tenth_pixel: %d, %d, %d\n", R, G, B);
- 
+
     free_image_data(data);
 }
 
-void min_pixel(char *filename) {
-    int W, H, x, y, min_somme = 256 * 3 + 1, min_x = 0, min_y = 0, channel_count;
-    unsigned char *data;
 
-    if (read_image_data(filename, &data, &W, &H, &channel_count) == 0) {
+
+void print_pixel( char *filename, int x, int y ){
+     unsigned char *data;
+    int width, height, channel_count;
+
+     if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
         printf("Erreur avec le fichier: %s\n", filename);
         return;
     }
 
-    for (y = 0; y < H; y++) {
-        for (x = 0; x < W; x++) {
-            int index = (y * W + x) * channel_count;
-            int R = data[index];
-            int G = data[index + 1];
-            int B = data[index + 2];
-
-            int somme = R + G + B;
-
-            if (somme < min_somme) {
-                min_somme = somme;
-                min_x = x;
-                min_y = y;
-            }
-        }
+    pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+    if (pixel == NULL) {
+        printf("Coordonnées invalides : (%d, %d)\n", x, y);
+    } else {
+        printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->R, pixel->G, pixel->B);
     }
-
-    int min_index = (min_y * W + min_x) * channel_count;
-    printf("min_pixel (%d, %d): %d, %d, %d\n",min_x, min_y,data[min_index], data[min_index + 1], data[min_index + 2]);
 
     free_image_data(data);
 }
- 
+
+
+
+void max_pixel(char *filename){
+    int W, H, x, y, max_somme=-1, max_x=0, max_y=0, channel_count;
+    unsigned char *data;
+
+    int result = read_image_data(filename, &data, &W, &H, &channel_count);
+    if (result == 0) {
+        printf("Erreur avec le fichier %s\n", filename);
+        return;
+    }
+
+    for (y=0; y<H; y++) {
+        for (x=0; x<W; x++) {
+            int index=(y*W+x)*channel_count;
+            int R, G, B;
+
+            R=data[index];
+            G=data[index + 1];
+            B=data[index + 2];
+
+            int somme=R+G+B;
+
+            if (somme>max_somme){
+                max_somme=somme;
+                max_x=x;
+                max_y=y;
+            }
+        }
+    }
+    int max_index=(max_y*W+max_x)*channel_count;
+    printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y, data[max_index], data[max_index + 1], data[max_index + 2]) ;
+}
+
