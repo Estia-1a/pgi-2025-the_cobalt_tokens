@@ -15,7 +15,7 @@ void helloWorld() {
     printf("Hello World !");
 }
 
-void first_pixel (char *filename){
+void first_pixel (char* filename){
 
 unsigned char* data;
 int width, height, channel_count;
@@ -44,7 +44,7 @@ void dimension(char* filename) {
     }
 }
 
-void second_line(char *filename){
+void second_line(char* filename){
     
     int index, width, height, channel_count, R, G, B;
     unsigned char* data;
@@ -67,6 +67,24 @@ void second_line(char *filename){
         free_image_data(data);
             
     }
-
-
 }
+
+void print_pixel( char *filename, int x, int y ){
+     unsigned char *data;
+    int width, height, channel_count;
+
+     if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+        return;
+    }
+
+    pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
+    if (pixel == NULL) {
+        printf("Coordonnées invalides : (%d, %d)\n", x, y);
+    } else {
+        printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->R, pixel->G, pixel->B);
+    }
+
+    free_image_data(data);
+}
+

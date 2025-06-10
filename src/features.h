@@ -10,4 +10,6 @@ void dimension(char* filename);
 
 void second_line(char *filename);
 
+void print_pixel( char *filename, int x, int y );
+
 #endif
