@@ -47,6 +47,9 @@ int main(int argc, char **argv) {
     int y = atoi(argv[argc - 1]);  
     print_pixel(configuration.filenames[0], x, y);
   }
+  else if ( strcmp(configuration.command, "min_component") == 0){
+    min_component(configuration.filenames[0], configuration.arguments[0][0]);
+  }
 
   /*
    * TO COMPLETE
