@@ -1,8 +1,9 @@
 #include <estia-image.h>
 #include <stdio.h>
-
+#include <limits.h>
 #include "features.h"
 #include "utils.h"
+#include <stdlib.h>
 
 /**
  * @brief Here, you have to code features of the project.
@@ -181,3 +182,26 @@ void min_pixel(char *filename){
     int min_index=(min_y*W+min_x)*channel_count;
     printf("min_pixel (%d, %d): %d, %d, %d\n", min_x, min_y, data[min_index], data[min_index + 1], data[min_index + 2]) ;
 }
+
+void color_red(char *filename){
+    unsigned char *data;
+    int i, width, height, channel_count, total_pixels, pixel_start;
+
+    read_image_data(filename, &data, &width, &height, &channel_count);
+
+    total_pixels = width * height;
+
+    for (i = 0; i < total_pixels; i++) {
+        pixel_start = i * channel_count;
+
+        data[pixel_start + 1] = 0;
+        data[pixel_start + 2] = 0;
+    }
+
+
+    write_image_data("image_out.bmp", data, width, height);
+    printf("image_out.bmp\n");
+    
+    free_image_data(data);
+}
+

@@ -48,7 +48,11 @@ int main(int argc, char **argv) {
     print_pixel(configuration.filenames[0], x, y);
   } else if ( strncmp( configuration.command, "min_pixel", 9) == 0 ) {
     min_pixel(configuration.filenames[0]);
-  }
+  } else if (strcmp(configuration.command, "color_red") == 0) {
+    color_red(configuration.filenames[0]);
+}
+
+
 
   /*
    * TO COMPLETE
