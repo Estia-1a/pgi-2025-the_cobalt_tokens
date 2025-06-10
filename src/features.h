@@ -11,4 +11,6 @@ void second_line(char *filename);
 
 void tenth_pixel(char* filename);
 
+void min_pixel(char *filename);
+
 #endif
