@@ -12,53 +12,65 @@
  * When the feature is totally implemented, your commit message must contain "close #n".
  */
 
-void helloWorld() {
+void helloWorld()
+{
     printf("Hello World !");
 }
 
-void first_pixel (char *filename){
+void first_pixel(char *filename)
+{
 
-    unsigned char* data;
+    unsigned char *data;
     int width, height, channel_count;
- 
-    if (read_image_data(filename, &data, &width, &height, &channel_count)!=0) {
-       int R=data[0], G=data[1], B=data[2];
-        
+
+    if (read_image_data(filename, &data, &width, &height, &channel_count) != 0)
+    {
+        int R = data[0], G = data[1], B = data[2];
+
         printf("first_pixel : %d, %d, %d", R, G, B);
         free_image_data(data);
-    } else { 
+    }
+    else
+    {
         printf("Erreur avec l'image: %s\n", filename);
     }
 }
 
+void dimension(char *filename)
+{
 
-void dimension(char* filename) {
-    
-    unsigned char* data;
+    unsigned char *data;
     int width, height, channel_count;
 
-    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0)
+    {
         printf("Erreur avec le fichier: %s\n", filename);
-    } else {
+    }
+    else
+    {
         printf("dimension: %d, %d\n", width, height);
         free_image_data(data);
     }
 }
 
-void second_line(char *filename){
-    
+void second_line(char *filename)
+{
+
     int index, width, height, channel_count, R, G, B;
-    unsigned char* data;
+    unsigned char *data;
 
-    
-    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0)
+    {
         printf("Erreur avec le fichier: %s\n", filename);
+    }
+    else if (height < 2)
+    {
+        printf("Erreur : L'image doit avoir au moins 2 lignes de pixel\n");
+    }
+    else
+    {
 
-    } else if (height < 2 ){
-        printf ("Erreur : L'image doit avoir au moins 2 lignes de pixel\n");
-    } else {
-
-        index = width * 3;  
+        index = width * 3;
 
         R = data[index];
         G = data[index + 1];
@@ -66,20 +78,22 @@ void second_line(char *filename){
 
         printf("second_line: %d, %d, %d\n", R, G, B);
         free_image_data(data);
-            
     }
 }
 
-void tenth_pixel(char* filename) {
-    unsigned char* data;
+void tenth_pixel(char *filename)
+{
+    unsigned char *data;
     int width, height, channel_count;
 
-    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0)
+    {
         printf("Erreur avec le fichier: %s\n", filename);
         return;
     }
 
-    if (width * height < 10) {
+    if (width * height < 10)
+    {
         printf("Erreur : L'image doit contenir au moins 10 pixels\n");
         free_image_data(data);
         return;
@@ -96,59 +110,117 @@ void tenth_pixel(char* filename) {
     free_image_data(data);
 }
 
-
-
-void print_pixel( char *filename, int x, int y ){
-     unsigned char *data;
+void print_pixel(char *filename, int x, int y)
+{
+    unsigned char *data;
     int width, height, channel_count;
 
-     if (read_image_data(filename, &data, &width, &height, &channel_count) == 0) {
+    if (read_image_data(filename, &data, &width, &height, &channel_count) == 0)
+    {
         printf("Erreur avec le fichier: %s\n", filename);
         return;
     }
 
-    pixelRGB* pixel = get_pixel(data, width, height, channel_count, x, y);
-    if (pixel == NULL) {
+    pixelRGB *pixel = get_pixel(data, width, height, channel_count, x, y);
+    if (pixel == NULL)
+    {
         printf("Coordonnées invalides : (%d, %d)\n", x, y);
-    } else {
+    }
+    else
+    {
         printf("print_pixel (%d, %d): %d, %d, %d\n", x, y, pixel->R, pixel->G, pixel->B);
     }
 
     free_image_data(data);
 }
 
-
-
-void max_pixel(char *filename){
-    int W, H, x, y, max_somme=-1, max_x=0, max_y=0, channel_count;
+void max_pixel(char *filename)
+{
+    int W, H, x, y, max_somme = -1, max_x = 0, max_y = 0, channel_count;
     unsigned char *data;
 
     int result = read_image_data(filename, &data, &W, &H, &channel_count);
-    if (result == 0) {
+    if (result == 0)
+    {
         printf("Erreur avec le fichier %s\n", filename);
         return;
     }
 
-    for (y=0; y<H; y++) {
-        for (x=0; x<W; x++) {
-            int index=(y*W+x)*channel_count;
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
+            int index = (y * W + x) * channel_count;
             int R, G, B;
 
-            R=data[index];
-            G=data[index + 1];
-            B=data[index + 2];
+            R = data[index];
+            G = data[index + 1];
+            B = data[index + 2];
 
-            int somme=R+G+B;
+            int somme = R + G + B;
 
-            if (somme>max_somme){
-                max_somme=somme;
-                max_x=x;
-                max_y=y;
+            if (somme > max_somme)
+            {
+                max_somme = somme;
+                max_x = x;
+                max_y = y;
             }
         }
     }
-    int max_index=(max_y*W+max_x)*channel_count;
-    printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y, data[max_index], data[max_index + 1], data[max_index + 2]) ;
+    int max_index = (max_y * W + max_x) * channel_count;
+    printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y, data[max_index], data[max_index + 1], data[max_index + 2]);
+}
+
+void min_component(char *filename, char component)
+{
+    int channels, H, W;
+    unsigned char *data = NULL;
+
+    int result = read_image_data(filename, &data, &W, &H, &channels);
+    if (result == 0)
+    {
+        printf("Erreur avec le chargement de l'image : %s\n", filename);
+        return;
+    }
+
+    int min_x = 0, min_y = 0;
+    int min_valeur = 256;
+    int y, x;
+    int valeur = 0;
+
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
+            pixelRGB* pix = get_pixel(data, W, H, channels, x, y);
+            if (component == 'R')
+            {
+                valeur = pix->R;
+            }
+            else if (component == 'G')
+            {
+                valeur = pix->G;
+            }
+            else if (component == 'B')
+            {
+                valeur = pix->B;
+            }
+            else
+            {
+                printf("composant non valide : %c\n", component);
+            }
+
+            if (valeur < min_valeur)
+            {
+                min_valeur = valeur;
+                min_x = x;
+                min_y = y;
+            }
+        }
+        
+    }
+    printf("min_component %c (%d, %d): %d\n", component, min_x, min_y, min_valeur);
+        free_image_data(data);
 }
 
 void min_pixel(char *filename){
@@ -156,21 +228,24 @@ void min_pixel(char *filename){
     unsigned char *data;
 
     int result = read_image_data(filename, &data, &W, &H, &channel_count);
-    if (result == 0) {
+    if (result == 0)
+    {
         printf("Erreur avec le fichier %s\n", filename);
         return;
     }
 
-    for (y=0; y<H; y++) {
-        for (x=0; x<W; x++) {
-            int index=(y*W+x)*channel_count;
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
+            int index = (y * W + x) * channel_count;
             int R, G, B;
 
-            R=data[index];
-            G=data[index + 1];
-            B=data[index + 2];
+            R = data[index];
+            G = data[index + 1];
+            B = data[index + 2];
 
-            int somme=R+G+B;
+            int somme = R + G + B;
 
             if (somme<min_somme){
                 min_somme=somme;
@@ -205,3 +280,54 @@ void color_red(char *filename){
     free_image_data(data);
 }
 
+void max_component(char *filename, char component)
+{
+    int channels, H, W;
+    unsigned char *data = NULL;
+
+    int result = read_image_data(filename, &data, &W, &H, &channels);
+    if (result == 0)
+    {
+        printf("Erreur avec le chargement de l'image : %s\n", filename);
+        return;
+    }
+
+    int max_x = 0, max_y = 0;
+    int max_valeur = 0;
+    int y, x;
+    int valeur = 0;
+
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
+            pixelRGB* pix = get_pixel(data, W, H, channels, x, y);
+            if (component == 'R')
+            {
+                valeur = pix->R;
+            }
+            else if (component == 'G')
+            {
+                valeur = pix->G;
+            }
+            else if (component == 'B')
+            {
+                valeur = pix->B;
+            }
+            else
+            {
+                printf("composant non valide : %c\n", component);
+            }
+
+            if (valeur > max_valeur)
+            {
+                max_valeur = valeur;
+                max_x = x;
+                max_y = y;
+            }
+        }
+        
+    }
+    printf("max_component %c (%d, %d): %d\n", component, max_x, max_y, max_valeur);
+        free_image_data(data);
+}
