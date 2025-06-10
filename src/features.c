@@ -15,10 +15,23 @@ void helloWorld() {
     printf("Hello World !");
 }
 
-void first_pixel (char* filename){
+void dimension(char* filename) {
+    
+    unsigned char* data;
+    int width, height, channel_count;
 
-unsigned char* data;
-int width, height, channel_count;
+    if (read_image_data(filename, &data, &width, &height, &channel_count)==0) {
+        printf("Erreur avec le fichier: %s\n", filename);
+    } else {
+        printf("dimension: %d, %d\n", width, height);
+        free_image_data(data);
+    }
+}
+
+void first_pixel (char *filename){
+
+    unsigned char* data;
+    int width, height, channel_count;
  
     if (read_image_data(filename, &data, &width, &height, &channel_count)!=0) {
        int R=data[0], G=data[1], B=data[2];
@@ -44,7 +57,7 @@ void dimension(char* filename) {
     }
 }
 
-void second_line(char* filename){
+void second_line(char *filename){
     
     int index, width, height, channel_count, R, G, B;
     unsigned char* data;
@@ -67,6 +80,17 @@ void second_line(char* filename){
         free_image_data(data);
             
     }
+    int R, G, B;
+ 
+    int index = 9 * channel_count;
+    R = data[index];
+    G = data[index + 1];
+    B = data[index + 2];
+ 
+    printf("tenth_pixel: %d, %d, %d\n", R, G, B);
+ 
+    free_image_data(data);
+}
 }
 
 void print_pixel( char *filename, int x, int y ){
