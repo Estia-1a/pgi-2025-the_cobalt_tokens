@@ -116,5 +116,6 @@ void min_pixel(char *filename) {
     int min_index = (min_y * W + min_x) * channel_count;
     printf("min_pixel (%d, %d): %d, %d, %d\n",min_x, min_y,data[min_index], data[min_index + 1], data[min_index + 2]);
 
-    free_image_data(data); 
+    free_image_data(data);
 }
+ 
