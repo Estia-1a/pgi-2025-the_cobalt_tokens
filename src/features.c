@@ -256,3 +256,55 @@ void min_pixel(char *filename){
     int min_index=(min_y*W+min_x)*channel_count;
     printf("min_pixel (%d, %d): %d, %d, %d\n", min_x, min_y, data[min_index], data[min_index + 1], data[min_index + 2]) ;
 }
+
+void max_component(char *filename, char component)
+{
+    int channels, H, W;
+    unsigned char *data = NULL;
+
+    int result = read_image_data(filename, &data, &W, &H, &channels);
+    if (result == 0)
+    {
+        printf("Erreur avec le chargement de l'image : %s\n", filename);
+        return;
+    }
+
+    int max_x = 0, max_y = 0;
+    int max_valeur = 0;
+    int y, x;
+    int valeur = 0;
+
+    for (y = 0; y < H; y++)
+    {
+        for (x = 0; x < W; x++)
+        {
+            pixelRGB* pix = get_pixel(data, W, H, channels, x, y);
+            if (component == 'R')
+            {
+                valeur = pix->R;
+            }
+            else if (component == 'G')
+            {
+                valeur = pix->G;
+            }
+            else if (component == 'B')
+            {
+                valeur = pix->B;
+            }
+            else
+            {
+                printf("composant non valide : %c\n", component);
+            }
+
+            if (valeur > max_valeur)
+            {
+                max_valeur = valeur;
+                max_x = x;
+                max_y = y;
+            }
+        }
+        
+    }
+    printf("max_component %c (%d, %d): %d\n", component, max_x, max_y, max_valeur);
+        free_image_data(data);
+}
