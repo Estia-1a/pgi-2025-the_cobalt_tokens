@@ -19,4 +19,6 @@ void print_pixel( char *filename, int x, int y );
 
 void min_component(char *filename, char component);
 
+void max_component(char *filename, char component);
+
 #endif
