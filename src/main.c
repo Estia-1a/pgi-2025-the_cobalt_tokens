@@ -42,6 +42,11 @@ int main(int argc, char **argv) {
   } else if ( strcmp(configuration.command, "max_pixel") == 0){
     max_pixel(configuration.filenames[0]);
   }
+  else if (strcmp(configuration.command, "print_pixel") == 0) {
+    int x = atoi(argv[argc - 2]);  
+    int y = atoi(argv[argc - 1]);  
+    print_pixel(configuration.filenames[0], x, y);
+  }
 
   /*
    * TO COMPLETE

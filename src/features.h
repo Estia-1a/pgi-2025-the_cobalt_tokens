@@ -13,4 +13,6 @@ void tenth_pixel(char* filename);
 
 void max_pixel(char *filename);
 
+void print_pixel( char *filename, int x, int y );
+
 #endif
