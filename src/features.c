@@ -84,7 +84,7 @@ void second_line(char *filename)
 void tenth_pixel(char *filename)
 {
     unsigned char *data;
-    int width, height, channel_count;
+    int width, height, channel_count, index, R, G, B;
 
     if (read_image_data(filename, &data, &width, &height, &channel_count) == 0)
     {
@@ -99,11 +99,11 @@ void tenth_pixel(char *filename)
         return;
     }
 
-    int index = 9 * channel_count;
+    index = 9 * channel_count;
 
-    int R = data[index];
-    int G = data[index + 1];
-    int B = data[index + 2];
+    R = data[index];
+    G = data[index + 1];
+    B = data[index + 2];
 
     printf("tenth_pixel: %d, %d, %d\n", R, G, B);
 
@@ -136,10 +136,14 @@ void print_pixel(char *filename, int x, int y)
 
 void max_pixel(char *filename)
 {
-    int W, H, x, y, max_somme = -1, max_x = 0, max_y = 0, channel_count;
+    int W, H, x, y, max_somme, max_x, max_y, channel_count, result, index, R, G, B, somme, max_index;
     unsigned char *data;
 
-    int result = read_image_data(filename, &data, &W, &H, &channel_count);
+    max_y = 0;
+    max_x = 0;
+    max_somme = -1;
+
+    result = read_image_data(filename, &data, &W, &H, &channel_count);
     if (result == 0)
     {
         printf("Erreur avec le fichier %s\n", filename);
@@ -150,14 +154,13 @@ void max_pixel(char *filename)
     {
         for (x = 0; x < W; x++)
         {
-            int index = (y * W + x) * channel_count;
-            int R, G, B;
-
+            index = (y * W + x) * channel_count;
+            
             R = data[index];
             G = data[index + 1];
             B = data[index + 2];
 
-            int somme = R + G + B;
+            somme = R + G + B;
 
             if (somme > max_somme)
             {
@@ -167,7 +170,7 @@ void max_pixel(char *filename)
             }
         }
     }
-    int max_index = (max_y * W + max_x) * channel_count;
+    max_index = (max_y * W + max_x) * channel_count;
     printf("max_pixel (%d, %d): %d, %d, %d\n", max_x, max_y, data[max_index], data[max_index + 1], data[max_index + 2]);
 }
 
