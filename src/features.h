@@ -45,4 +45,6 @@ void mirror_horizontal(char *filename);
 
 void mirror_total(char *filename);
 
+void scale_bilinear (char *filename, float scale);
+
 #endif
