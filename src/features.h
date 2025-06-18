@@ -27,4 +27,6 @@ void max_component(char *filename, char component);
 
 void color_invert(char *filename);
 
+void rotate_acw (char *filename);
+
 #endif

@@ -61,6 +61,8 @@ int main(int argc, char **argv) {
   }
   else if (strcmp(configuration.command, "color_invert") == 0) {
     color_invert(configuration.filenames[0]);
+} else if (strcmp(configuration.command, "rotate_acw") == 0) {
+    rotate_acw(configuration.filenames[0]);
 }
 
   /*
