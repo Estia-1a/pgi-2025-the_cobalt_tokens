@@ -595,7 +595,7 @@ void color_gray_luminance(char *filename){
         
         data[pixel_start] = gray_value;
         data[pixel_start + 1] = gray_value;
-        data[pixel_start + 2] = gray_value;+    
+        data[pixel_start + 2] = gray_value;    
     }
 
     write_image_data("image_out.bmp", data, width, height);
