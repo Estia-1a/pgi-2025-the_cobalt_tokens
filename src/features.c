@@ -454,15 +454,15 @@ void rotate_cw(char *filename){
     for (i = 0; i < H; i++) {  
         for (j = 0; j < W; j++) {  
    
-            int pos_old = (i * W + j) * 3;
+            int ancienne_pos = (i * W + j) * 3;
 
-            int ligne_new = j;
-            int colonne_new = H - 1 - i;
-            int pos_new = (ligne_new * new_W + colonne_new) * 3;
+            int nouv_ligne = j;
+            int nouv_colonne = H - 1 - i;
+            int nouv_pos = (nouv_ligne * new_W + nouv_colonne) * 3;
             
-            new_data[pos_new] = data[pos_old]; 
-            new_data[pos_new + 1] = data[pos_old + 1];  
-            new_data[pos_new + 2] = data[pos_old + 2];
+            new_data[nouv_pos] = data[ancienne_pos]; 
+            new_data[nouv_pos + 1] = data[ancienne_pos + 1];  
+            new_data[nouv_pos + 2] = data[ancienne_pos + 2];
         }
     }
     write_image_data("image_out.bmp", new_data, new_W, new_H);
@@ -508,12 +508,12 @@ void mirror_horizontal(char *filename) {
     unsigned char *new_data = malloc(W * H * 3);
     for (i = 0; i < H; i++) {
         for (j = 0; j < W; j++) {
-            int pos_old = (i * W + j) * 3;
-            int pos_new = (i * W + (W - 1 - j)) * 3;
+            int ancienne_pos = (i * W + j) * 3;
+            int nouv_pos = (i * W + (W - 1 - j)) * 3;
 
-            new_data[pos_new] = data[pos_old];
-            new_data[pos_new + 1] = data[pos_old + 1];
-            new_data[pos_new + 2] = data[pos_old + 2];
+            new_data[nouv_pos] = data[ancienne_pos];
+            new_data[nouv_pos + 1] = data[ancienne_pos + 1];
+            new_data[nouv_pos + 2] = data[ancienne_pos + 2];
         }
     }
 
@@ -537,12 +537,12 @@ void mirror_vertical(char *filename) {
 
     for (i = 0; i < H; i++) {
         for (j = 0; j < W; j++) {
-            int pos_old = (i * W + j) * 3;
-            int pos_new = ((H - 1 - i) * W + j) * 3;
+            int ancienne_pos = (i * W + j) * 3;
+            int nouv_pos = ((H - 1 - i) * W + j) * 3;
 
-            new_data[pos_new] = data[pos_old];
-            new_data[pos_new + 1] = data[pos_old + 1];
-            new_data[pos_new + 2] = data[pos_old + 2];
+            new_data[nouv_pos] = data[ancienne_pos];
+            new_data[nouv_pos + 1] = data[ancienne_pos + 1];
+            new_data[nouv_pos + 2] = data[ancienne_pos + 2];
         }
     }
 
@@ -566,12 +566,12 @@ void mirror_total(char *filename) {
 
     for (i = 0; i < H; i++) {
         for (j = 0; j < W; j++) {
-            int pos_old = (i * W + j) * 3;
-            int pos_new = ((H - 1 - i) * W + (W - 1 - j)) * 3;
+            int ancienne_pos = (i * W + j) * 3;
+            int nouv_pos = ((H - 1 - i) * W + (W - 1 - j)) * 3;
 
-            new_data[pos_new] = data[pos_old];
-            new_data[pos_new + 1] = data[pos_old + 1];
-            new_data[pos_new + 2] = data[pos_old + 2];
+            new_data[nouv_pos] = data[ancienne_pos];
+            new_data[nouv_pos + 1] = data[ancienne_pos + 1];
+            new_data[nouv_pos + 2] = data[ancienne_pos + 2];
         }
     }
 
@@ -630,6 +630,7 @@ void color_desaturate(char *filename){
     
     free_image_data(data);
 }
+
 void scale_crop(char *filename, int center_x, int center_y, int crop_width, int crop_height) {
     unsigned char *data;
     int W, H, channel_count;
