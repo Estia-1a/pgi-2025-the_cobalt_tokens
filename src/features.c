@@ -331,3 +331,4 @@ void max_component(char *filename, char component)
     printf("max_component %c (%d, %d): %d\n", component, max_x, max_y, max_valeur);
         free_image_data(data);
 }
+
