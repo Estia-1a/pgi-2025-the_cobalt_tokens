@@ -577,3 +577,44 @@ void mirror_total(char *filename) {
     free_image_data(data);
     free(new_data);
 }
+
+void scale_crop(char *filename, int center_x, int center_y, int crop_width, int crop_height) {
+    unsigned char *data;
+    int W, H, channel_count;
+
+    int result = read_image_data(filename, &data, &W, &H, &channel_count);
+    if (result == 0) {
+        printf("Erreur lors du chargement de l'image : %s\n", filename);
+        return;
+    }
+
+    int start_x = center_x - crop_width / 2;
+    int start_y = center_y - crop_height / 2;
+
+    unsigned char *new_data = malloc(crop_width * crop_height * 3);
+    
+    for (int y = 0; y < crop_height; y++) {
+        for (int x = 0; x < crop_width; x++) {
+            int src_x = start_x + x;
+            int src_y = start_y + y;
+
+            int dst_pos = (y * crop_width + x) * 3;
+            if (src_x >= 0 && src_x < W && src_y >= 0 && src_y < H) {
+                int src_pos = (src_y * W + src_x) * 3;
+
+                new_data[dst_pos] = data[src_pos];
+                new_data[dst_pos + 1] = data[src_pos + 1];
+                new_data[dst_pos + 2] = data[src_pos + 2];
+            } else {
+                new_data[dst_pos] = 0;
+                new_data[dst_pos + 1] = 0;
+                new_data[dst_pos + 2] = 0;
+            }
+        }
+    }
+    write_image_data("image_out.bmp", new_data, crop_width, crop_height);
+    printf("image_out.bmp\n");
+    free_image_data(data);
+    free(new_data);
+}
+

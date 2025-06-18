@@ -73,7 +73,16 @@ int main(int argc, char **argv) {
     mirror_vertical(configuration.filenames[0]);
 }else if (strcmp(configuration.command, "mirror_total") == 0) {
     mirror_total(configuration.filenames[0]);
+}else if (strcmp(configuration.command, "scale_crop") == 0) {
+    
+    int center_x = atoi(configuration.params[0]);
+    int center_y = atoi(configuration.params[1]);
+    int width    = atoi(configuration.params[2]);
+    int height   = atoi(configuration.params[3]);
+ 
+    scale_crop(configuration.filenames[0], center_x, center_y, width, height);
 }
+
 
 
   /*
