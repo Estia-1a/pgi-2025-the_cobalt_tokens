@@ -519,3 +519,32 @@ void mirror_horizontal(char *filename) {
     free_image_data(data);
     free(new_data);
 }
+
+void mirror_vertical(char *filename) {
+    unsigned char *data;
+    int W, H, channel_count, i, j;
+
+    int resultat = read_image_data(filename, &data, &W, &H, &channel_count);
+    if (resultat == 0) {
+        printf("Erreur de fichier: %s\n", filename);
+        return;
+    }
+
+    unsigned char *new_data = malloc(W * H * 3);
+
+    for (i = 0; i < H; i++) {
+        for (j = 0; j < W; j++) {
+            int pos_old = (i * W + j) * 3;
+            int pos_new = ((H - 1 - i) * W + j) * 3;
+
+            new_data[pos_new] = data[pos_old];
+            new_data[pos_new + 1] = data[pos_old + 1];
+            new_data[pos_new + 2] = data[pos_old + 2];
+        }
+    }
+
+    write_image_data("image_out.bmp", new_data, W, H);
+    printf("image_out.bmp\n");
+    free_image_data(data);
+    free(new_data);
+}
