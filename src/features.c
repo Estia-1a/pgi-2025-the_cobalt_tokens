@@ -710,4 +710,62 @@ void stat_report(char *filename) {
     fclose(f);
 }
 
+void scale_bilinear (char *filename, float scale) {
+    unsigned char *data, *new_data;
+    int width, height, channel_count;
+    int new_width, new_height;
+    int x, y, c;
+    float src_x, src_y;
+    int x1, y1, x2, y2;
+    float dx, dy;
+    unsigned char q11, q12, q21, q22;
+    float value;
 
+    read_image_data(filename, &data, &width, &height, &channel_count);
+
+    new_width = (int)(width * scale);
+    new_height = (int)(height * scale);
+
+    new_data = (unsigned char*)malloc(new_width * new_height * channel_count);
+
+    for (y = 0; y < new_height; y++) {
+        for (x = 0; x < new_width; x++) {
+            
+            src_x = x / scale;
+            src_y = y / scale;
+
+            x1 = (int)src_x;
+            y1 = (int)src_y;
+            x2 = x1 + 1;
+            y2 = y1 + 1;
+
+            if (x2 >= width) x2 = width - 1;
+            if (y2 >= height) y2 = height - 1;
+
+            dx = src_x - x1;
+            dy = src_y - y1;
+
+            for (c = 0; c < channel_count; c++) {
+                
+                q11 = data[(y1 * width + x1) * channel_count + c];
+                q12 = data[(y2 * width + x1) * channel_count + c];
+                q21 = data[(y1 * width + x2) * channel_count + c];
+                q22 = data[(y2 * width + x2) * channel_count + c];
+
+            
+                value = q11 * (1 - dx) * (1 - dy) +
+                        q21 * dx * (1 - dy) +
+                        q12 * (1 - dx) * dy +
+                        q22 * dx * dy;
+
+                new_data[(y * new_width + x) * channel_count + c] = (unsigned char)value;
+            }
+        }
+    }
+
+    write_image_data("image_out.bmp", new_data, new_width, new_height);
+    printf("image_out.bmp\n");
+
+    free_image_data(data);
+    free(new_data);
+}

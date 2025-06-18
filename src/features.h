@@ -49,4 +49,6 @@ void scale_crop(char *filename, int center_x, int center_y, int crop_width, int 
 
 void stat_report(char *filename);
 
+void scale_bilinear (char *filename, float scale);
+
 #endif
