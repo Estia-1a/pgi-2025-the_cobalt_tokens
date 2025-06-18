@@ -53,7 +53,9 @@ int main(int argc, char **argv) {
     color_green(configuration.filenames[0]);
   } else if (strcmp(configuration.command, "color_blue") == 0) {
     color_blue(configuration.filenames[0]);
-  } else if ( strcmp(configuration.command, "min_component") == 0){
+  } else if (strcmp(configuration.command, "color_gray") == 0) {
+    color_gray(configuration.filenames[0]);
+  }else if ( strcmp(configuration.command, "min_component") == 0){
     min_component(configuration.filenames[0], configuration.arguments[0][0]);
   }
   else if ( strcmp(configuration.command, "max_component") == 0){
@@ -65,6 +67,10 @@ int main(int argc, char **argv) {
     rotate_acw(configuration.filenames[0]);
 }else if (strcmp(configuration.command, "rotate_cw") == 0) {
     rotate_cw(configuration.filenames[0]);
+}else if (strcmp(configuration.command, "mirror_horizontal") == 0) {
+    mirror_horizontal(configuration.filenames[0]);
+}else if (strcmp(configuration.command, "mirror_vertical") == 0) {
+    mirror_vertical(configuration.filenames[0]);
 }
 
   /*
