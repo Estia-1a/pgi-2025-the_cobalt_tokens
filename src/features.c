@@ -674,3 +674,40 @@ void scale_crop(char *filename, int center_x, int center_y, int crop_width, int 
     free(new_data);
 }
 
+void stat_report(char *filename) {
+    
+    FILE *f = fopen("stat_report.txt", "w");
+
+    if (f == NULL) {
+        printf("Erreur: Impossible de créer le fichier stat_report.txt\n");
+        return;
+    }
+
+    max_pixel(filename);
+    fprintf(f, "\n");
+
+    min_pixel(filename);
+    fprintf(f, "\n");
+
+    max_component(filename, 'R');
+    fprintf(f, "\n");
+
+    max_component(filename, 'G');
+    fprintf(f, "\n");
+
+    max_component(filename, 'B');
+    fprintf(f, "\n");
+
+    min_component(filename, 'R');
+    fprintf(f, "\n");
+
+    min_component(filename, 'G');
+    fprintf(f, "\n");
+
+    min_component(filename, 'B');
+    fprintf(f, "\n");
+
+    fclose(f);
+}
+
+

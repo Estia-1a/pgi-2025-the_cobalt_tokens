@@ -85,6 +85,8 @@ int main(int argc, char **argv) {
     int height   = atoi(configuration.arguments[3]);
  
     scale_crop(configuration.filenames[0], center_x, center_y, width, height);
+} else if (strcmp(configuration.command, "stat_report") == 0) {
+      stat_report(configuration.filenames[0]);
 }
 
 
