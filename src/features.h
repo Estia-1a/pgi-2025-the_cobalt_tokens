@@ -25,6 +25,8 @@ void color_blue(char *filename);
 
 void color_gray (char *filename);
 
+void color_gray_luminance (char *filename);
+
 void min_component(char *filename, char component);
 
 void max_component(char *filename, char component);
@@ -38,5 +40,7 @@ void rotate_cw (char *filename);
 void mirror_vertical(char *filename);
 
 void mirror_horizontal(char *filename);
+
+void mirror_total(char *filename);
 
 #endif

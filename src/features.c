@@ -548,3 +548,58 @@ void mirror_vertical(char *filename) {
     free_image_data(data);
     free(new_data);
 }
+
+void mirror_total(char *filename) {
+    unsigned char *data;
+    int W, H, channel_count, i, j;
+
+    int resultat = read_image_data(filename, &data, &W, &H, &channel_count);
+    if (resultat == 0) {
+        printf("Erreur de fichier: %s\n", filename);
+        return;
+    }
+
+    unsigned char *new_data = malloc(W * H * 3);
+
+    for (i = 0; i < H; i++) {
+        for (j = 0; j < W; j++) {
+            int pos_old = (i * W + j) * 3;
+            int pos_new = ((H - 1 - i) * W + (W - 1 - j)) * 3;
+
+            new_data[pos_new] = data[pos_old];
+            new_data[pos_new + 1] = data[pos_old + 1];
+            new_data[pos_new + 2] = data[pos_old + 2];
+        }
+    }
+
+    write_image_data("image_out.bmp", new_data, W, H);
+    printf("image_out.bmp\n");
+    free_image_data(data);
+    free(new_data);
+}
+void color_gray_luminance(char *filename){
+    unsigned char *data;
+    int i, width, height, channel_count, total_pixels, pixel_start;
+    unsigned char gray_value;
+
+    read_image_data(filename, &data, &width, &height, &channel_count);
+
+    total_pixels = width * height;
+
+    for (i = 0; i < total_pixels; i++) {
+        pixel_start = i * channel_count;
+
+        
+        gray_value = (unsigned char)(0.21 * data[pixel_start] + 0.72 * data[pixel_start + 1] + 0.07 * data[pixel_start + 2]);
+        
+        
+        data[pixel_start] = gray_value;
+        data[pixel_start + 1] = gray_value;
+        data[pixel_start + 2] = gray_value;+    
+    }
+
+    write_image_data("image_out.bmp", data, width, height);
+    printf("image_out.bmp\n");
+    
+    free_image_data(data);
+}

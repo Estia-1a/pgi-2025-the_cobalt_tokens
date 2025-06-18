@@ -55,6 +55,8 @@ int main(int argc, char **argv) {
     color_blue(configuration.filenames[0]);
   } else if (strcmp(configuration.command, "color_gray") == 0) {
     color_gray(configuration.filenames[0]);
+  } else if (strcmp(configuration.command, "color_gray_luminance") == 0) {
+    color_gray_luminance(configuration.filenames[0]);
   }else if ( strcmp(configuration.command, "min_component") == 0){
     min_component(configuration.filenames[0], configuration.arguments[0][0]);
   }
@@ -71,7 +73,10 @@ int main(int argc, char **argv) {
     mirror_horizontal(configuration.filenames[0]);
 }else if (strcmp(configuration.command, "mirror_vertical") == 0) {
     mirror_vertical(configuration.filenames[0]);
+}else if (strcmp(configuration.command, "mirror_total") == 0) {
+    mirror_total(configuration.filenames[0]);
 }
+
 
   /*
    * TO COMPLETE
