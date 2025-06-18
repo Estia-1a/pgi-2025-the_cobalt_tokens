@@ -25,6 +25,8 @@ void color_blue(char *filename);
 
 void color_gray (char *filename);
 
+void color_gray_luminance (char *filename);
+
 void min_component(char *filename, char component);
 
 void max_component(char *filename, char component);
