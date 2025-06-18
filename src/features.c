@@ -606,6 +606,7 @@ void color_gray_luminance(char *filename){
     
     free_image_data(data);
 }
+
 void color_desaturate(char *filename){
     unsigned char *data;
     int i, width, height, channel_count, total_pixels, pixel_start;
@@ -630,7 +631,9 @@ void color_desaturate(char *filename){
     
     free_image_data(data);
 }
+
 void scale_crop(char *filename, int center_x, int center_y, int crop_width, int crop_height) {
+    
     unsigned char *data;
     int W, H, channel_count;
 
@@ -657,6 +660,7 @@ void scale_crop(char *filename, int center_x, int center_y, int crop_width, int 
                 new_data[dst_pos] = data[src_pos];
                 new_data[dst_pos + 1] = data[src_pos + 1];
                 new_data[dst_pos + 2] = data[src_pos + 2];
+                
             } else {
                 new_data[dst_pos] = 0;
                 new_data[dst_pos + 1] = 0;
