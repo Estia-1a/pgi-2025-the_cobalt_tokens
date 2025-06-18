@@ -23,4 +23,6 @@ void min_component(char *filename, char component);
 
 void max_component(char *filename, char component);
 
+void color_invest(char *filename);
+
 #endif
