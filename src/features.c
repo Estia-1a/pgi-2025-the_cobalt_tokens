@@ -414,23 +414,23 @@ void rotate_acw(char *filename){
         printf("Erreur de fichier: %s\n", filename);
         return;
     }
-    int new_W = H;  
-    int new_H = W;
-    unsigned char *new_data = malloc(new_W * new_H * 3);
+    int nouv_W = H;  
+    int nouv_H = W;
+    unsigned char *new_data = malloc(nouv_W * nouv_H * 3);
     for (i = 0; i < H; i++) {  
         for (j = 0; j < W; j++) {  
    
-            int pos_old = (i * W + j) * 3;
-            int ligne_new = W - 1 - j;
-            int colonne_new = i;
-            int pos_new = (ligne_new * new_W + colonne_new) * 3;
+            int ancienne_pos = (i * W + j) * 3;
+            int nouv_ligne = W - 1 - j;
+            int nouv_colonne = i;
+            int nouv_pos = (nouv_ligne * nouv_W + nouv_colonne) * 3;
             
-            new_data[pos_new] = data[pos_old]; 
-            new_data[pos_new + 1] = data[pos_old + 1];  
-            new_data[pos_new + 2] = data[pos_old + 2];
+            new_data[nouv_pos] = data[ancienne_pos]; 
+            new_data[nouv_pos + 1] = data[ancienne_pos + 1];  
+            new_data[nouv_pos + 2] = data[ancienne_pos + 2];
         }
     }
-    write_image_data("image_out.bmp", new_data, new_W, new_H);
+    write_image_data("image_out.bmp", new_data, nouv_W, nouv_H);
     printf("image_out.bmp\n");
     free_image_data(data);
     free(new_data);
