@@ -33,7 +33,6 @@ int main(int argc, char **argv) {
   } else if ( strcmp( configuration.command, "dimension") == 0 ) {
     dimension(configuration.filenames[0]);
   } else if ( strncmp( configuration.command, "first_pixel", 11 ) == 0 ) {
-    /* first_pixel() function is defined in feature.h and implemented in feature.c */
     first_pixel(configuration.filenames[0]);
   } else if ( strcmp(configuration.command, "second_line") == 0 ) {
     second_line(configuration.filenames[0]);
@@ -52,8 +51,9 @@ int main(int argc, char **argv) {
     color_red(configuration.filenames[0]);
   } else if (strcmp(configuration.command, "color_green") == 0) {
     color_green(configuration.filenames[0]);
-  }
-  else if ( strcmp(configuration.command, "min_component") == 0){
+  } else if (strcmp(configuration.command, "color_blue") == 0) {
+    color_blue(configuration.filenames[0]);
+  } else if ( strcmp(configuration.command, "min_component") == 0){
     min_component(configuration.filenames[0], configuration.arguments[0][0]);
   }
   else if ( strcmp(configuration.command, "max_component") == 0){
