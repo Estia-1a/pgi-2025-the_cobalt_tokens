@@ -411,7 +411,7 @@ void rotate_acw(char *filename){
     
     int resultat = read_image_data(filename, &data, &W, &H, &channel_count);
     if (resultat == 0) {
-        printf("Erreur de fichier: %s\n", filename);
+        printf("Erreur avec le fichier: %s\n", filename);
         return;
     }
     int nouv_W = H;  
@@ -499,7 +499,7 @@ void mirror_horizontal(char *filename) {
 
     int resultat = read_image_data(filename, &data, &W, &H, &channel_count);
     if (resultat == 0) {
-        printf("Erreur de fichier: %s\n", filename);
+        printf("Erreur avec le fichier: %s\n", filename);
         return;
     }
     unsigned char *new_data = malloc(W * H * 3);
@@ -526,7 +526,7 @@ void mirror_vertical(char *filename) {
 
     int resultat = read_image_data(filename, &data, &W, &H, &channel_count);
     if (resultat == 0) {
-        printf("Erreur de fichier: %s\n", filename);
+        printf("Erreur avec le fichier: %s\n", filename);
         return;
     }
 
