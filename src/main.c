@@ -53,7 +53,9 @@ int main(int argc, char **argv) {
     color_green(configuration.filenames[0]);
   } else if (strcmp(configuration.command, "color_blue") == 0) {
     color_blue(configuration.filenames[0]);
-  } else if ( strcmp(configuration.command, "min_component") == 0){
+  } else if (strcmp(configuration.command, "color_gray") == 0) {
+    color_gray(configuration.filenames[0]);
+  }else if ( strcmp(configuration.command, "min_component") == 0){
     min_component(configuration.filenames[0], configuration.arguments[0][0]);
   }
   else if ( strcmp(configuration.command, "max_component") == 0){
