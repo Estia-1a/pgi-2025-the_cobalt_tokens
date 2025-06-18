@@ -49,6 +49,8 @@ int main(int argc, char **argv) {
     min_pixel(configuration.filenames[0]);
   } else if (strcmp(configuration.command, "color_red") == 0) {
     color_red(configuration.filenames[0]);
+  } else if (strcmp(configuration.command, "color_green") == 0) {
+    color_green(configuration.filenames[0]);
   }
   else if ( strcmp(configuration.command, "min_component") == 0){
     min_component(configuration.filenames[0], configuration.arguments[0][0]);
@@ -56,6 +58,9 @@ int main(int argc, char **argv) {
   else if ( strcmp(configuration.command, "max_component") == 0){
     max_component(configuration.filenames[0], configuration.arguments[0][0]);
   }
+  else if (strcmp(configuration.command, "color_invert") == 0) {
+    color_invert(configuration.filenames[0]);
+}
 
   /*
    * TO COMPLETE

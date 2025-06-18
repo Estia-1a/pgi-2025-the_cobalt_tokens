@@ -332,3 +332,53 @@ void max_component(char *filename, char component)
         free_image_data(data);
 }
 
+
+
+void color_green(char *filename){
+    unsigned char *data;
+    int i, width, height, channel_count, total_pixels, pixel_start;
+
+    read_image_data(filename, &data, &width, &height, &channel_count);
+
+    total_pixels = width * height;
+
+    for (i = 0; i < total_pixels; i++) {
+        pixel_start = i * channel_count;
+
+        data[pixel_start] = 0;
+        data[pixel_start + 2] = 0; 
+        
+    }
+
+    write_image_data("image_out.bmp", data, width, height);
+    printf("image_out.bmp\n");
+    
+    free_image_data(data);
+}
+
+
+void color_invert(char *filename){
+    unsigned char *data;
+    int i, W, H, channel_count, tot_pixels, pixel_start;
+
+        int resultat = read_image_data(filename, &data, &W, &H, &channel_count);
+        if (resultat == 0) {
+            printf("Erreur avec fichier : %s\n", filename);
+            return;
+    }
+
+    tot_pixels = W * H;
+
+    for (i = 0; i < tot_pixels; i++) {
+        pixel_start = i * channel_count;
+
+        data[pixel_start] = 255 - data[pixel_start];
+        data[pixel_start + 1] = 255 - data[pixel_start + 1];
+        data[pixel_start + 2] = 255 - data[pixel_start + 2]; 
+    }
+
+    write_image_data("image_out.bmp", data, W, H);
+    printf("image_out.bmp\n");
+    
+    free_image_data(data);
+}
