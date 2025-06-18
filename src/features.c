@@ -332,6 +332,8 @@ void max_component(char *filename, char component)
         free_image_data(data);
 }
 
+
+
 void color_green(char *filename){
     unsigned char *data;
     int i, width, height, channel_count, total_pixels, pixel_start;
