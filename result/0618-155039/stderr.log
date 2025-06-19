@@ -1,0 +1,4 @@
+/home/runner/work/pgi-2025-the_cobalt_tokens/pgi-2025-the_cobalt_tokens/src/main.c: In function ‘main’:
+/home/runner/work/pgi-2025-the_cobalt_tokens/pgi-2025-the_cobalt_tokens/src/main.c:83:1: warning: ignoring return value of ‘scanf’ declared with attribute ‘warn_unused_result’ [-Wunused-result]
+   83 | scanf("%f", &scale);
+      | ^~~~~~~~~~~~~~~~~~~
