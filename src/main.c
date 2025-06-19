@@ -78,10 +78,10 @@ int main(int argc, char **argv) {
 }else if (strcmp(configuration.command, "mirror_total") == 0) {
     mirror_total(configuration.filenames[0]);
 } else if (strcmp(configuration.command, "scale_bilinear") == 0) {
-  float scale;
-printf("Entrez le facteur d'echelle (entre 0.5 et 3): ");
-scanf("%f", &scale);
-scale_bilinear(configuration.filenames[0], scale);
+
+  float scale = atof(configuration.arguments[0]);
+  scale_bilinear(configuration.filenames[0],scale);
+
 }else if (strcmp(configuration.command, "scale_crop") == 0) {
     
     int center_x = atoi(configuration.arguments[0]);
